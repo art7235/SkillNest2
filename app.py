@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -16,6 +16,12 @@ def about():
 @app.route("/user/<string:name>/<int:id>")
 def user(name, id):
     return name + str(id)
+
+
+@app.route('/hello')
+def hello():
+    name = request.args.get('name', 'Guest')
+    return render_template('hello.html', name=name)
 
 
 if __name__ == "__main__":
